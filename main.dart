@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproject/feed.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //SizedBox(height: MediaQuery.sizeOf(context).height * 0.15),
+                //==============팀 소개 버튼================
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.purple,
@@ -61,6 +63,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+                //=============팀원 소개 버튼 =============
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.purple,
@@ -69,7 +72,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => testMemberPage(),
+                        builder: (_) => MemberSummaryPage(),
                       ),
                     );
                   },
@@ -98,17 +101,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class testMemberPage extends StatelessWidget {
-  const testMemberPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("팀원 소개")),
-    );
-  }
-}
-
 class TeamPage extends StatelessWidget {
   const TeamPage({Key? key}) : super(key: key);
 
@@ -121,7 +113,7 @@ class TeamPage extends StatelessWidget {
           "십일조 소개",
           style: TextStyle(
             color: Colors.white,
-            //fontSize: 20,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -252,6 +244,78 @@ class TeamPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MemberSummaryPage extends StatelessWidget {
+  const MemberSummaryPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<String> images = [
+      "https://ifh.cc/g/kDaKF7.jpg",
+      "https://ifh.cc/g/tVyHZn.jpg",
+      "https://ifh.cc/g/LsrBHx.jpg",
+      "https://ifh.cc/g/28FsqF.jpg",
+      "https://ifh.cc/g/1xXkcs.jpg",
+    ];
+    final List<String> productNames = [
+      "이름: 정현식",
+      "이름:정선호",
+      "이름:권경운",
+      "이름:장재용",
+      "이름:한상철",
+    ];
+    final List<String> Sports = [
+      "취미: 농구하기",
+      "취미: 노래부르기",
+      "취미: 노래방, 헬스",
+      "취미: 헬스, 요리",
+      "취미: 게임, 음주",
+    ];
+    final List<String> Mbtis = [
+      "MBTI: ISTP",
+      "MBTI: ISFP",
+      "MBTI: ISFP",
+      "MBTI: ISFP",
+      "MBTI: ISTP",
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple,
+        title: Text(
+          '십일조 ',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView.separated(
+          itemCount: images.length, // 이미지 개수만큼 보여주기
+          itemBuilder: (context, index) {
+            final image = images[index];
+            final productName = productNames[index];
+            final Sport = Sports[index];
+            final Mbti = Mbtis[index]; // index에 해당하는 이미지
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Feed(
+                  imageUrl: image,
+                  product: productName,
+                  sport: Sport,
+                  mbti: Mbti), // imageUrl 전달
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider();
+          },
         ),
       ),
     );

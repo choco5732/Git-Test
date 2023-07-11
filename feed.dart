@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 
 class Feed extends StatefulWidget {
   const Feed({
-    super.key,
+    Key? key,
     required this.imageUrl,
-    required this.product, //추가한 코드
-  });
+    required this.product,
+    required this.sport,
+    required this.mbti,
+  }) : super(key: key);
 
-  final String imageUrl; // 이미지를 담을 변수
-  final String product; // 추가한 코드
+  final String imageUrl;
+  final String product;
+  final String sport;
+  final String mbti;
+  // 이미지를 담을 변수
 
   @override
   State<Feed> createState() => _FeedState();
 }
 
 class _FeedState extends State<Feed> {
-  // 좋아요 여부
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -41,7 +43,7 @@ class _FeedState extends State<Feed> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.product, // 추가한 코드
+                widget.product,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black,
@@ -52,46 +54,42 @@ class _FeedState extends State<Feed> {
               ),
               SizedBox(height: 2),
               Text(
-                '봉천동 · 6분 전',
+                widget.sport, //'취미: 농구',
                 style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black45,
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 4),
               Text(
-                '100만원',
+                widget.mbti, // 'MBTI: ISTP',
                 style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
               Row(
                 children: [
-                  Spacer(), // 빈 공간을 차지하는 위젯
+                  Spacer(),
                   GestureDetector(
-                    // 일반 위젯을 버튼으로 만들어주는 위젯
-                    onTap: () {
-                      setState(() {
-                        isFavorite = !isFavorite; // 좋아요 누를때마다 반대
-                      });
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
                         Icon(
-                          isFavorite
-                              ? CupertinoIcons.heart_fill
-                              : CupertinoIcons.heart,
-                          color: isFavorite ? Colors.pink : Colors.black,
+                          CupertinoIcons.plus,
+                          color: Colors.black,
                           size: 16,
                         ),
                         Text(
-                          '1',
-                          style: TextStyle(color: Colors.black54),
+                          '더보기',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ],
                     ),
                   )
+                  // 빈 칸
+                  // 하트 아이콘
+                  // '1'
                 ],
               ),
             ],
