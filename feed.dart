@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:miniproject/main.dart';
 
 class Feed extends StatefulWidget {
   const Feed({
@@ -72,7 +73,14 @@ class _FeedState extends State<Feed> {
                 children: [
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPageKKW(),
+                        ),
+                      );
+                    },
                     child: Row(
                       children: [
                         Icon(
